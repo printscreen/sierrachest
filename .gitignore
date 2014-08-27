@@ -1,3 +1,4 @@
 /public/.htaccess
 /application/configs/application.ini
 public/.DS_Store
+migration/
