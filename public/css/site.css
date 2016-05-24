@@ -2,16 +2,65 @@
  * Style tweaks
  * --------------------------------------------------
  */
+
 html,
 body {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
 }
+
 body {
   padding-top: 70px;
+  background-color: #B6B6B4;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: right top;
+  background: -moz-linear-gradient(top, rgba(132,132,130,1) 0%, rgba(223,229,215,1) 60%, rgba(229,228,226,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(132,132,130,1) 0%,rgba(223,229,215,1) 60%,rgba(229,228,226,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(132,132,130,1) 0%,rgba(223,229,215,1) 60%,rgba(229,228,226,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#848482', endColorstr='#e5e4e2',GradientType=0 ); /* IE6-9 */
 }
+
 footer {
   padding: 30px 0;
 }
+
+a {
+  color: #000080;
+}
+
+img {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+/* make sidebar nav vertical */ 
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+  }
+  .sidebar-nav .navbar ul:not {
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
+
+
 
 /*
  * Off Canvas
@@ -48,4 +97,10 @@ footer {
     top: 0;
     width: 50%; /* 6 columns */
   }
+ 
+}
+
+
+li {
+    line-height: 70%;
 }
