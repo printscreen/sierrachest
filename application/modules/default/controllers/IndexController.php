@@ -26,6 +26,11 @@ class IndexController extends Sierra_Controller_Action
     public function gameSearchAction()
     {
     }
+
+//the following function should become a slug creator for all games in the datatable 'games'. Using the game lighthouse as an example
+    public function lighthouseAction()
+    {
+    }
     
     public function demosAction()
     {
