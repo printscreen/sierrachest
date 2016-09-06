@@ -14,24 +14,29 @@ class Model_Games extends Model_Base_Db
         $this->_games = array();
     }
 
-    public function getGames($active = true, $sort = null, $offset = null, $limit = null)
+    public function getGames($sort = null, $offset = null, $limit = null)
     {
         $sql = "
             SELECT
-                location_id
-              , name
-              , street
-              , city
-              , state
-              , zip
-              , phone_number
-              , active
+                g.game_id
+              , g.slug
+              , g.title
+              , g.description
+              , g.cover_art
+              , g.release_date
+              , g.system_requirements
+              , g.esrb_id
+              , g.banner
+              , g.gog_link
+              , g.ebay_link
+              , g.completion_date
+              , g.insert_ts
+              , g.update_ts
               , ( SELECT
                     count(*)
-                  FROM location
+                  FROM game
                 ) AS total
-            FROM location
-            WHERE active = :active
+            FROM game g
             ORDER BY :sort ".$this->getDirection($sort)."
             LIMIT :offset,:limit
         ";
@@ -40,9 +45,7 @@ class Model_Games extends Model_Base_Db
         $sort = $this->getSort($sort);
         $offset = $this->getOffset($offset);
         $limit = $this->getLimit($limit);
-        $active = $this->convertFromBoolean($active);
 
-        $query->bindParam(':active', $active, PDO::PARAM_BOOL);
         $query->bindParam(':sort', $sort, PDO::PARAM_INT);
         $query->bindParam(':offset', $offset, PDO::PARAM_INT);
         $query->bindParam(':limit', $limit, PDO::PARAM_INT);
@@ -50,25 +53,25 @@ class Model_Games extends Model_Base_Db
 
         $result = $query->fetchAll();
 
-        $this->_locations = array();
+        $this->_games = array();
         if(!empty($result)) {
             foreach($result as $key => $value) {
-                $location = new Model_Location();
-                $location->loadRecord($value);
-                $this->_locations[] = $location;
+                $game = new Model_Game();
+                $game->loadRecord($value);
+                $this->_games[] = $game;
             }
         }
-        return $this->_locations;
+        return $this->_games;
     }
 
     public function toArray()
     {
-        $locations = array();
-        if(is_array($this->_locations) && count($this->_locations) > 0) {
-            foreach($this->_locations as $location) {
-                $locations[] = $location->toArray();
+        $games = array();
+        if(is_array($this->_games) && count($this->_games) > 0) {
+            foreach($this->_games as $game) {
+                $games[] = $game->toArray();
             }
         }
-        return $locations;
+        return $games;
     }
 }

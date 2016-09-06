@@ -1,0 +1,17 @@
+<div class="ribbon ribbon-pulled ribbon-small ribbon-highlight">
+    <a target="_blank" href="<?= $this->item->getUrl(); ?>"><?= $this->item->getGameName(); ?></a>
+</div>
+<header class="entry-header">
+    <h3 class="entry-title"><a target="_blank" href="<?= $this->item->getUrl(); ?>"><?= mb_strimwidth($this->item->getTitle(), 0, 100, '...'); ?></a></h3>
+    <div class="entry-meta">
+        <span class="entry-date"><a target="_blank" href="<?= $this->item->getUrl(); ?>"><?= $this->item->getPrice(); ?> <?= $this->item->getCurrency(); ?></a></span>
+        <span class="entry-author"> by <a target="_blank" href="<?= $this->item->getUrl(); ?>"><?= $this->item->getStoreName(); ?></a></span>
+    </div>
+</header>
+<figure class="entry-thumbnail">
+    <a target="_blank" href="<?= $this->item->getUrl(); ?>" class="overlay overlay-primary"></a>
+    <img src="<?= $this->item->getImage(); ?>" data-src="<?= $this->item->getImage(); ?>" data-src-retina="<?= $this->item->getImage(); ?>" width="680" height="452" alt="">
+    <noscript>
+        <img src="<?= $this->item->getImage(); ?>" alt="">
+    </noscript>
+</figure>
