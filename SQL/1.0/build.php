@@ -1,5 +1,10 @@
  <?php
 
+$config = parse_ini_file(realpath(dirname(__FILE__) . '/../../application/configs/application.ini'));
+
+$username = $config['resources.db.params.username'];
+$password = $config['resources.db.params.password'];
+$servername = $config['resources.db.params.host'];
 
 $oldDb = new PDO("mysql:host=$servername;dbname=sierra_old", $username, $password);
 $db = new PDO("mysql:host=$servername;dbname=sierra", $username, $password);
@@ -191,8 +196,21 @@ $db->query('UPDATE store_item SET display_number = 6 WHERE store_item_id = 98');
 $db->query('UPDATE store_item SET display_number = 7 WHERE store_item_id = 97');
 $db->query('UPDATE store_item SET display_number = 8 WHERE store_item_id = 96');
 
-
-
+// Screenshots
+$result = $oldDb->query('SELECT * FROM screenshots ORDER BY id ASC');
+$query = $db->prepare("INSERT INTO screenshot (game_id, date, description, image, thumbnail) VALUES (:game_id, :date, :description, :image, :thumbnail)");
+while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    $query->bindValue(':game_id', $row['games_id'], PDO::PARAM_INT);
+    $query->bindValue(':date', $row['date'], PDO::PARAM_STR);
+    $query->bindValue(':description', $row['description'], PDO::PARAM_STR);
+    $query->bindValue(':image', $row['filename'], PDO::PARAM_STR);
+    $query->bindValue(':thumbnail', $row['thumbname'], PDO::PARAM_STR);
+    try {
+       $query->execute();
+   } catch (Exception $e) {
+    echo $e->getMessage();
+   }
+}
 
 
 

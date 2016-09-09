@@ -30,7 +30,9 @@
     <body>
         <h1 class="sr-only">Sierra Chest</h1>
         <?= $this->partial('partials/header.phtml', 'default'); ?>
-        <?= $this->layout()->content; ?>
+        <div id="main" class="container">
+            <?= $this->layout()->content; ?>
+        </div>
         <?= $this->partial('partials/footer.phtml', 'default'); ?>
 
         <script src="/vendor/jquery-1.10.1.min.js"></script>

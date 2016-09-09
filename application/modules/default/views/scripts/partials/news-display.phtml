@@ -1,0 +1,16 @@
+<div class="ribbon ribbon-pulled ribbon-small ribbon-highlight">
+    <a href="/news/<?= $this->news->getTitle(); ?>"><?= date('M j Y', strtotime($this->news->getDate())); ?></a>
+</div>
+<header class="entry-header">
+    <h3 class="entry-title"><a href="/news/<?= $this->news->getTitle(); ?>"><?= mb_strimwidth($this->news->getTitle(), 0, 100, '...'); ?></a></h3>
+    <div class="entry-meta">
+        <span class="entry-date"><a href="/news/<?= $this->news->getTitle(); ?>"><time datetime="<?= $this->news->getDate(); ?>"><?= Sierra_Utils_Fuzzy::getFuzzyTime($this->news->getDate()); ?></time></a></span>
+    </div>
+</header>
+<figure class="entry-thumbnail">
+    <a target="_blank" href="/news/<?= $this->news->getTitle(); ?>" class="overlay overlay-primary"></a>
+    <img src="<?= $this->news->getImage(); ?>" data-src="<?= $this->news->getImage(); ?>" data-src-retina="<?= $this->news->getImage(); ?>" width="680" height="452" alt="">
+    <noscript>
+        <img src="<?= $this->news->getImage(); ?>" alt="">
+    </noscript>
+</figure>

@@ -96,7 +96,7 @@ class Model_StoreItems extends Model_Base_Db
             INNER JOIN game g ON si.game_id = g.game_id
             WHERE display_number IS NOT NULL
             ORDER BY display_number ASC
-            LIMIT 8
+            LIMIT 4
         ";
         $query = $this->_db->prepare($sql);
         $query->execute();

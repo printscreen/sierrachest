@@ -60,6 +60,21 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Zend_Registry::set(SESSION, $session);
     }
 
+    protected function _initSpecialRoutes()
+    {
+        $router = Zend_Controller_Front::getInstance()->getRouter();
+        $route = new Zend_Controller_Router_Route(
+            'game/:slug',
+            array(
+                'module'     => 'default',
+                'controller' => 'game',
+                'action'     => 'game'
+            ),
+            array('slug' => '[a-z0-9\-]+')
+        );
+        $router->addRoute('author', $route);
+    }
+
     protected function _initMailTransport()
     {
         $options = $this->getOption('mail');

@@ -104,3 +104,14 @@ CREATE TABLE store_item (
     FOREIGN KEY (game_id) REFERENCES game(game_id),
     FOREIGN KEY (box_id) REFERENCES box(box_id)
 );
+
+CREATE TABLE screenshot (
+    screen_shot_id  INT(10)         NOT NULL auto_increment,
+    game_id         INT(10)         NOT NULL,
+    date            DATE            NOT NULL,
+    description     TEXT            NOT NULL,
+    image           VARCHAR(255)    NOT NULL,
+    thumbnail       VARCHAR(255)    NOT NULL,
+    PRIMARY KEY(screen_shot_id),
+    FOREIGN KEY (game_id) REFERENCES game(game_id)
+);
