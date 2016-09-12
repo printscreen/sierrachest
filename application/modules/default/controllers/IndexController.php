@@ -8,13 +8,16 @@ class IndexController extends Sierra_Controller_Action
         $this->view->storeItems = $storeItemsModel->getDisplayItems();
 
         $gamesModel = new Model_Games();
-        $this->view->games  = $gamesModel->getGames(-1, 0, 10);
+        $this->view->games  = $gamesModel->getGames(-12, 0, 10);
 
         $newsModel = new Model_Newss();
         $this->view->newss = $newsModel->getNews(-2, 0, 8);
 
+        //$screenShotModel = new Model_ScreenShots();
+        //$this->view->screenShots = $screenShotModel->getScreenShots(null, -4, 0, 5);
+        
         $screenShotModel = new Model_ScreenShots();
-        $this->view->screenShots = $screenShotModel->getScreenShots(null, -4, 0, 5);
+        $this->view->screenShots = $screenShotModel->getLatestScreenShots();
     }
 
     public function sierraMagazinesAction()
