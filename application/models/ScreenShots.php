@@ -61,6 +61,38 @@ class Model_ScreenShots extends Model_Base_Db
         );
     }
 
+    public function getLatestScreenShots()
+    {
+        $sql = "
+            SELECT
+                s.screen_shot_id    AS screen_shot_id
+              , s.game_id           AS game_id
+              , g.title             AS game_name
+              , s.date              AS date
+              , s.description       AS description
+              , s.image             AS image
+              , s.thumbnail         AS thumbnail
+              , 5                   AS total
+            FROM screenshot s
+            INNER JOIN game g ON s.game_id = g.game_id
+            INNER JOIN (
+                SELECT max(date) AS date,
+                     screen_shot_id
+                FROM screenshot
+                GROUP BY game_id
+                ORDER BY screen_shot_id DESC
+                LIMIT 5
+            ) ss ON ss.screen_shot_id = s.screen_shot_id
+        ";
+
+        $query = $this->_db->prepare($sql);
+        $query->execute();
+
+        return $this->_loadRecords(
+            $query->fetchAll()
+        );
+    }
+
     private function _loadRecords($result)
     {
         $this->_screenShots = array();
